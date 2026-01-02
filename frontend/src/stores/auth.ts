@@ -1,16 +1,16 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { authApi } from '../services/api'
-import { useRouter } from 'vue-router'
+// import { useRouter } from 'vue-router'
 
 export const useAuthStore = defineStore('auth', () => {
     const user = ref<any>(JSON.parse(localStorage.getItem('user') || 'null'))
     const token = ref<string | null>(localStorage.getItem('token'))
-    const router = useRouter() // Note: may not work inside store setup directly in some versions, but usually fine in actions
+    // const router = useRouter() // Removed unused
 
     async function login(credentials: any) {
         const response = await authApi.post('/signin', credentials)
-        token.value = response.data.accessToken
+        token.value = response.data.token
         user.value = {
             id: response.data.id,
             username: response.data.username,

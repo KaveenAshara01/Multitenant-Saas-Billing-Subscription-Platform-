@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/tenants")
+@CrossOrigin("*")
 public class TenantController {
     @Autowired
     private TenantService tenantService;

@@ -3,6 +3,9 @@ import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 import Dashboard from '../views/Dashboard.vue'
+import Subscription from '../views/Subscription.vue'
+import Billing from '../views/Billing.vue'
+import Team from '../views/Team.vue'
 
 const routes = [
     { path: '/', component: Home },
@@ -13,6 +16,21 @@ const routes = [
         component: Dashboard,
         meta: { requiresAuth: true }
     },
+    {
+        path: '/subscription',
+        component: Subscription,
+        meta: { requiresAuth: true }
+    },
+    {
+        path: '/billing',
+        component: Billing,
+        meta: { requiresAuth: true }
+    },
+    {
+        path: '/team',
+        component: Team,
+        meta: { requiresAuth: true }
+    },
 ]
 
 const router = createRouter({
@@ -20,7 +38,7 @@ const router = createRouter({
     routes,
 })
 
-router.beforeEach((to, from, next) => {
+router.beforeEach((to, _from, next) => {
     const token = localStorage.getItem('token')
     if (to.meta.requiresAuth && !token) {
         next('/login')

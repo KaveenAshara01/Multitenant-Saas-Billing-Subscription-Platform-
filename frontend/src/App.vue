@@ -1,9 +1,7 @@
-<script setup lang="ts">
-// Global app logic if needed
-</script>
-
 <template>
-  <router-view></router-view>
+  <div class="h-full bg-dark text-gray-100 font-sans">
+    <router-view></router-view>
+  </div>
 </template>
 
 <style>

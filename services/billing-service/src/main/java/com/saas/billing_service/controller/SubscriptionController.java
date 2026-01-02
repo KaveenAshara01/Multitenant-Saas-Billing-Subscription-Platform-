@@ -12,6 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/billing")
 @RequiredArgsConstructor
+@CrossOrigin("*")
 public class SubscriptionController {
 
     private final BillingService billingService;

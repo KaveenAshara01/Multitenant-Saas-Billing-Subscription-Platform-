@@ -1,26 +1,31 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@theme {
+  --color-primary: #3b82f6;
+  --color-primary-hover: #2563eb;
+  --color-dark: #0f172a;
+  --color-dark-lighter: #1e293b;
+  --color-dark-card: #283449; /* Added for cards/modals */
+  
+  --font-sans: 'Inter', sans-serif;
+}
 
 @layer base {
   body {
-    @apply bg-gray-50 text-gray-900 antialiased;
-    font-family: 'Inter', sans-serif;
+    @apply bg-dark text-gray-100 antialiased font-sans;
   }
 }
 
 /* Custom premium scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px; /* Sleet */
 }
 ::-webkit-scrollbar-track {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  @apply bg-gray-300 rounded-full;
+  @apply bg-gray-700 rounded-full;
 }
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-gray-400;
+  @apply bg-gray-600;
 }

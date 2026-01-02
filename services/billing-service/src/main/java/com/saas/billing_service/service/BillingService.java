@@ -2,6 +2,8 @@ package com.saas.billing_service.service;
 
 import com.saas.billing_service.entity.Plan;
 import com.saas.billing_service.entity.Subscription;
+import com.saas.billing_service.exception.DuplicateSubscriptionException;
+import com.saas.billing_service.exception.ResourceNotFoundException;
 import com.saas.billing_service.repository.PlanRepository;
 import com.saas.billing_service.repository.SubscriptionRepository;
 import lombok.RequiredArgsConstructor;
@@ -29,14 +31,14 @@ public class BillingService {
     @Transactional
     public Subscription createSubscription(Long tenantId, String planName) {
         Plan plan = planRepository.findByName(planName)
-                .orElseThrow(() -> new RuntimeException("Plan not found: " + planName));
+                .orElseThrow(() -> new ResourceNotFoundException("Plan not found: " + planName));
 
         // Check if tenant already has an active subscription
         boolean hasActive = subscriptionRepository.findByTenantId(tenantId).stream()
                 .anyMatch(s -> s.getStatus() == Subscription.SubscriptionStatus.ACTIVE);
 
         if (hasActive) {
-            throw new RuntimeException("Tenant already has an active subscription");
+            throw new DuplicateSubscriptionException("Tenant already has an active subscription");
         }
 
         Subscription subscription = Subscription.builder()

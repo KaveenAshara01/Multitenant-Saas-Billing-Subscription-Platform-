@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 
 @RestController
 @RequestMapping("/api/payments")
+@CrossOrigin("*")
 public class PaymentController {
     @Autowired
     private PaymentService paymentService;

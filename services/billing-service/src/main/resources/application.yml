@@ -5,7 +5,7 @@ spring:
   application:
     name: billing-service
   datasource:
-    url: jdbc:mysql://localhost:3307/billing_db
+    url: jdbc:mysql://localhost:3307/saas_billing
     username: root
     password: ${DB_PASSWORD:12345}
     driver-class-name: com.mysql.cj.jdbc.Driver
