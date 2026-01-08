@@ -1,8 +1,20 @@
 <script setup lang="ts">
 import { useAuthStore } from '../stores/auth';
+import { useBillingStore } from '../stores/billing';
+import { onMounted, computed } from 'vue';
 import DefaultLayout from '../layouts/DefaultLayout.vue';
 
 const authStore = useAuthStore();
+const billingStore = useBillingStore();
+
+onMounted(async () => {
+    await billingStore.fetchSubscriptions();
+});
+
+const currentPlan = computed(() => {
+    const activeSub = billingStore.subscriptions.find(sub => sub.status === 'ACTIVE');
+    return activeSub ? activeSub.plan.name : 'Free Tier';
+});
 </script>
 
 <template>
@@ -31,7 +43,7 @@ const authStore = useAuthStore();
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         <div class="bg-dark-card border border-gray-800 rounded-2xl p-6">
             <h3 class="text-gray-400 font-medium mb-1">Current Plan</h3>
-            <p class="text-2xl font-bold text-white">Free Tier</p>
+            <p class="text-2xl font-bold text-white">{{ currentPlan }}</p>
             <router-link to="/subscription" class="text-blue-400 text-sm hover:underline mt-2 inline-block">Upgrade Plan</router-link>
         </div>
         <div class="bg-dark-card border border-gray-800 rounded-2xl p-6">
